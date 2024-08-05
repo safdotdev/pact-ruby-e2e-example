@@ -27,12 +27,12 @@ PactBroker::Client::PublicationTask.new(:remote) do | task |
   task.pattern = "consumer/spec/pacts/*.json"
 end
 
-Pact::VerificationTask.new(:foobar) do |pact|
+Pact::VerificationTask.new(:foobar_pact) do |pact|
   pact.uri './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
 end
-task 'pact:verify:foobar_start' do
+task 'pact:verify:foobar' do
   Rake::Task['start_provider'].execute
-  Rake::Task['pact:verify:foobar'].execute
+  Rake::Task['pact:verify:foobar_pact'].execute
 ensure
   Rake::Task['stop_provider'].execute
 end
