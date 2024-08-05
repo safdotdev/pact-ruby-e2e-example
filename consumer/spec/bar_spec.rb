@@ -19,6 +19,7 @@ describe "BarClient", :pact => true do
       }
     })
 
+    bar_service.start_mock
     # This request would normally be performed some BarClient class,
     # but just use simple request for the purposes of this test
     bar_response = Faraday.get(bar_service.mock_service_base_url + "/thing", nil, {'Accept' => 'application/json'})
@@ -27,5 +28,6 @@ describe "BarClient", :pact => true do
     # (eg. check for an array of Factory classes )
     # but just check the response code for the purposes of this test
     expect(bar_response.status).to eql 200
+    expect(JSON.parse(bar_response.body)).to eq JSON.parse('{"company":"My big company","factories":[{"location":"Sydney","capacity":5}]}')
   end
 end

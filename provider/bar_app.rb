@@ -1,7 +1,8 @@
+require 'json'
 class BarApp
   def call env
     status = 200
-    headers = {'Content-Type' => 'application/json'}
+    headers = { 'content-type' => 'application/json' }
     body = {
       "company": "My Company",
       "factories": [

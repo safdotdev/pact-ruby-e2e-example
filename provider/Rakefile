@@ -4,6 +4,14 @@ require 'pact_broker/client/tasks'
 LOCAL_PACT_BROKER_BASE_URL = 'http://localhost:9292'
 REMOTE_PACT_BROKER_BASE_URL = 'https://test.pact.dius.com.au'
 
+task :start_provider do
+  system 'bundle exec rackup config.ru --pid provider.pid -D'
+end
+
+task :stop_provider do
+  system 'kill $(cat provider.pid)'
+end
+
 # These pact publication tasks would normally be in the consumer codebase,
 # but they're here so we can run the entire consumer/provider flow with one rake command.
 PactBroker::Client::PublicationTask.new(:local) do | task |
@@ -19,8 +27,14 @@ PactBroker::Client::PublicationTask.new(:remote) do | task |
   task.pattern = "consumer/spec/pacts/*.json"
 end
 
-Pact::VerificationTask.new(:foobar) do | pact |
+Pact::VerificationTask.new(:foobar) do |pact|
   pact.uri './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
+end
+task 'pact:verify:foobar_start' do
+  Rake::Task['start_provider'].execute
+  Rake::Task['pact:verify:foobar'].execute
+ensure
+  Rake::Task['stop_provider'].execute
 end
 
 Pact::VerificationTask.new(:foobar_using_local_broker) do | pact |
