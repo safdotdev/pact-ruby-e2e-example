@@ -19,3 +19,4 @@ gem "faraday", "~> 1.0", "< 3.0"
 gem "pry-byebug", "~> 3"
 # gem 'rack-reverse-proxy'
 # gem 'rack-reverse-proxy', :git => 'https://github.com/samedi/rack-reverse-proxy.git', branch: 'main'
+gem "rackup", "~> 2.1"

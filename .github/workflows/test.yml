@@ -9,6 +9,11 @@ jobs:
       matrix:
         ruby_version: ["2.7", "3.0", "3.1", "3.2", "3.3"]
         os: ["ubuntu-latest","windows-latest","macos-latest"]
+        exclude: # no ffi gem released for supporting platform
+          - os: windows-latest
+            ruby_version: "2.7"
+          - os: windows-latest
+            ruby_version: "3.0"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4

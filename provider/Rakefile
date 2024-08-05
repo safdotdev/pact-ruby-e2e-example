@@ -28,7 +28,7 @@ PactBroker::Client::PublicationTask.new(:remote) do | task |
 end
 
 Pact::VerificationTask.new(:foobar_pact) do |pact|
-  pact.uri './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
+  pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
 end
 task 'pact:verify:foobar' do
   Rake::Task['start_provider'].execute
