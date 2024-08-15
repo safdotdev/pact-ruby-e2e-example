@@ -1,11 +1,13 @@
 source "http://rubygems.org"
 
 if ENV['X_PACT_DEVELOPMENT']
-  gem "pact", path: '../pact'
+  gem "pact", path: '../pact-ruby'
   gem "pact-support", path: '../pact-support'
   gem "pact-mock_service", path: '../pact-mock_service'
 else
-  gem "pact", "~> 1.63"
+  gem "pact-mock_service", git: 'https://github.com/safdotdev/pact-mock_service.git', branch: 'feat/pact_v3_matcher_format'
+  gem "pact-support", git: 'https://github.com/safdotdev/pact-support.git', branch: 'feat/pact_v3_matcher_format'
+  gem "pact", git: 'https://github.com/safdotdev/pact-ruby.git', branch: 'feat/pact_v3_matcher_format'
 end
 
 gem "pact_broker-client"

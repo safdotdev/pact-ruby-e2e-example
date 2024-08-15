@@ -1,0 +1,65 @@
+{
+  "consumer": {
+    "name": "Foo"
+  },
+  "provider": {
+    "name": "Bar"
+  },
+  "interactions": [
+    {
+      "description": "a retrieve thing request",
+      "request": {
+        "method": "get",
+        "path": "/thing",
+        "headers": {
+          "Accept": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "company": "My big company",
+          "factories": [
+            {
+              "location": "Sydney",
+              "capacity": 5
+            }
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.company": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.factories": {
+              "matchers": [
+                {
+                  "min": 1
+                }
+              ]
+            },
+            "$.factories[*].*": {
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "3.0.0"
+    }
+  }
+}
