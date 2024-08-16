@@ -1,4 +1,5 @@
 require 'pact/tasks/verification_task'
+require 'pact/tasks/verification_task_ffi'
 require 'pact_broker/client/tasks'
 
 LOCAL_PACT_BROKER_BASE_URL = 'http://localhost:9292'
@@ -28,11 +29,22 @@ PactBroker::Client::PublicationTask.new(:remote) do | task |
 end
 
 Pact::VerificationTask.new(:foobar_pact) do |pact|
-  pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
+   pact.uri './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
+  # pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
+end
+Pact::Ffi::VerificationTask.new(:foobar_pact) do |pact|
+  pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper_ffi.rb'
 end
 task 'pact:verify:foobar' do
   Rake::Task['start_provider'].execute
   Rake::Task['pact:verify:foobar_pact'].execute
+ensure
+  Rake::Task['stop_provider'].execute
+end
+
+task 'pact_ffi:verify:foobar' do
+  Rake::Task['start_provider'].execute
+  Rake::Task['pact_ffi:verify:foobar_pact'].execute
 ensure
   Rake::Task['stop_provider'].execute
 end

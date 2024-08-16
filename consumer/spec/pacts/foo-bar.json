@@ -26,13 +26,26 @@
           "Content-Type": "application/json"
         },
         "matchingRules": {
-          "$.body.company": {
-            "match": "type"
+          "body": {
+            "$.company": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.factories": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type",
+                  "min": 1
+                }
+              ]
+            }
           },
-          "$.body.factories": {
-            "match": "type",
-            "min": 1
-          }
+          "header": {}
         },
         "status": 200
       }
@@ -45,7 +58,7 @@
       "models": "1.2.3"
     },
     "pactSpecification": {
-      "version": "2.0.0"
+      "version": "3.0.0"
     }
   },
   "provider": {

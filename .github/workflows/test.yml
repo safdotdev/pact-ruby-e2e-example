@@ -3,17 +3,12 @@ name: Test
 on: [push, pull_request]
 
 jobs:
-  test:
+  test_ruby:
     strategy:
       fail-fast: false
       matrix:
         ruby_version: ["2.7", "3.0", "3.1", "3.2", "3.3"]
         os: ["ubuntu-latest","windows-latest","macos-latest"]
-        exclude: # no ffi gem released for supporting platform
-          - os: windows-latest
-            ruby_version: "2.7"
-          - os: windows-latest
-            ruby_version: "3.0"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -25,4 +20,22 @@ jobs:
       - run: "bundle exec rake pact:verify:foobar"
         if: matrix.os != 'windows-latest'
       - run: "ruby.exe -S pact verify --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
+        if: matrix.os == 'windows-latest'
+  test_ffi:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version: ["2.7", "3.0", "3.1", "3.2", "3.3"]
+        os: ["ubuntu-latest","windows-latest","macos-latest"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+      - run: "bundle install"
+      - run: "bundle exec rake spec_ffi"
+      - run: "bundle exec rake pact_ffi:verify:foobar"
+        if: matrix.os != 'windows-latest'
+      - run: "ruby.exe -S pact verify-ffi --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
         if: matrix.os == 'windows-latest'

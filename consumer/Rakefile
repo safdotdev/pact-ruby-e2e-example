@@ -3,3 +3,6 @@ require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new('spec') do | task |
   task.pattern = "consumer/spec/bar_spec.rb"
 end
+RSpec::Core::RakeTask.new('spec_ffi') do | task |
+  task.pattern = "consumer/spec/bar_spec_ffi.rb"
+end

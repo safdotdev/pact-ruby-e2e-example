@@ -1,6 +1,6 @@
 require 'faraday'
-require 'pact/consumer/rspec'
-require_relative 'pact_helper_ruby'
+require 'pact/consumer/rspec_ffi'
+require_relative 'pact_helper_ffi'
 
 describe "BarClient", :pact => true do
   it "can retrieve a thing"  do
@@ -19,6 +19,8 @@ describe "BarClient", :pact => true do
       }
     })
 
+    puts bar_service.start_mock
+    puts bar_service.mock_service_base_url
     # This request would normally be performed some BarClient class,
     # but just use simple request for the purposes of this test
     bar_response = Faraday.get(bar_service.mock_service_base_url + "/thing", nil, {'Accept' => 'application/json'})
