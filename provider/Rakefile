@@ -48,7 +48,7 @@ end
 task 'pact_ffi:verify:foobar' do
   Rake::Task['start_provider'].execute
   if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
-    system 'powershell -C "bundle exec pact verify-ffi --provider-base-url http://localhost:929 --pact-helper ./provider/spec/pact_helper_ffi.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"'
+    system 'powershell -C "bundle exec pact verify-ffi --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper_ffi.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"'
   else
     Rake::Task['pact_ffi:verify:foobar_pact'].execute
   end
