@@ -19,7 +19,7 @@ jobs:
       - run: "bundle exec rake spec"
       - run: "bundle exec rake pact:verify:foobar"
         if: matrix.os != 'windows-latest'
-      - run: "ruby.exe -S pact verify --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
+      - run: "bundle exec pact verify --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
         if: matrix.os == 'windows-latest'
   test_ffi:
     strategy:
@@ -37,5 +37,5 @@ jobs:
       - run: "bundle exec rake spec_ffi"
       - run: "bundle exec rake pact_ffi:verify:foobar"
         if: matrix.os != 'windows-latest'
-      - run: "ruby.exe -S pact verify-ffi --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
+      - run: "bundle exec pact verify-ffi --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
         if: matrix.os == 'windows-latest'

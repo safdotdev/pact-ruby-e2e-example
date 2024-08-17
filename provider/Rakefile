@@ -6,11 +6,19 @@ LOCAL_PACT_BROKER_BASE_URL = 'http://localhost:9292'
 REMOTE_PACT_BROKER_BASE_URL = 'https://test.pact.dius.com.au'
 
 task :start_provider do
-  system 'bundle exec rackup config.ru --pid provider.pid -D'
+  if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+    system 'Start-Process -NoNewWindow powershell { bundle exec rackup config.ru --pid provider.pid }'
+  else
+    system 'bundle exec rackup config.ru --pid provider.pid -D'
+  end
 end
 
 task :stop_provider do
-  system 'kill $(cat provider.pid)'
+  if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+    system 'taskkill /f /pid $(cat provider.pid)'
+  else
+    system 'kill $(cat provider.pid)'
+  end
 end
 
 # These pact publication tasks would normally be in the consumer codebase,
@@ -28,19 +36,13 @@ PactBroker::Client::PublicationTask.new(:remote) do | task |
   task.pattern = "consumer/spec/pacts/*.json"
 end
 
-Pact::VerificationTask.new(:foobar_pact) do |pact|
+Pact::VerificationTask.new(:foobar) do |pact|
    pact.uri './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
-  # pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper.rb'
 end
 Pact::Ffi::VerificationTask.new(:foobar_pact) do |pact|
   pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper_ffi.rb'
 end
-task 'pact:verify:foobar' do
-  Rake::Task['start_provider'].execute
-  Rake::Task['pact:verify:foobar_pact'].execute
-ensure
-  Rake::Task['stop_provider'].execute
-end
+
 
 task 'pact_ffi:verify:foobar' do
   Rake::Task['start_provider'].execute
