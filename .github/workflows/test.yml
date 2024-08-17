@@ -36,6 +36,6 @@ jobs:
       - run: "bundle install"
       - run: "bundle exec rake spec_ffi"
       - run: "bundle exec rake pact_ffi:verify:foobar"
-        if: matrix.os != 'windows-latest'
-      - run: "bundle exec pact verify-ffi --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper_ffi.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
-        if: matrix.os == 'windows-latest'
+      #   if: matrix.os != 'windows-latest'
+      # - run: "bundle exec pact verify-ffi --provider-base-url http://localhost:9292 --pact-helper ./provider/spec/pact_helper_ffi.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
+      #   if: matrix.os == 'windows-latest'

@@ -7,17 +7,19 @@ REMOTE_PACT_BROKER_BASE_URL = 'https://test.pact.dius.com.au'
 
 task :start_provider do
   if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
-    system 'Start-Process -NoNewWindow powershell { bundle exec rackup config.ru --pid provider.pid }'
+    @pid = Process.spawn('bundle exec rackup config.ru --pid provider.pid')
+    sleep 5
   else
     system 'bundle exec rackup config.ru --pid provider.pid -D'
   end
 end
 
 task :stop_provider do
+  provider_pid = File.read('provider.pid')
   if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
-    system 'taskkill /f /pid $(cat provider.pid)'
+    system "taskkill /f /pid #{provider_pid}"
   else
-    system 'kill $(cat provider.pid)'
+    system "kill #{provider_pid}"
   end
 end
 
@@ -43,10 +45,13 @@ Pact::Ffi::VerificationTask.new(:foobar_pact) do |pact|
   pact.provider_base_url 'http://localhost:9292', uri: './consumer/spec/pacts/foo-bar.json', pact_helper: './provider/spec/pact_helper_ffi.rb'
 end
 
-
 task 'pact_ffi:verify:foobar' do
   Rake::Task['start_provider'].execute
-  Rake::Task['pact_ffi:verify:foobar_pact'].execute
+  if RUBY_PLATFORM =~ /mswin|mingw|cygwin/
+    system 'powershell -C "bundle exec pact verify-ffi --provider-base-url http://localhost:929 --pact-helper ./provider/spec/pact_helper_ffi.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"'
+  else
+    Rake::Task['pact_ffi:verify:foobar_pact'].execute
+  end
 ensure
   Rake::Task['stop_provider'].execute
 end
