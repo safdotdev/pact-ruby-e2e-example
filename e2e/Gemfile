@@ -18,3 +18,4 @@ gem 'pry-byebug', '~> 3'
 gem 'rake', '~> 12'
 gem 'rspec', '~> 3'
 
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
