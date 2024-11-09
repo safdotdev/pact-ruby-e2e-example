@@ -8,7 +8,7 @@ if ENV['X_PACT_DEVELOPMENT']
 else
   gem 'combustion'
   gem 'rspec-rails'
-  gem 'sbmt-pact'
+  gem 'sbmt-pact', git: 'https://github.com/YOU54F/sbmt-pact.git', branch: 'feat/pact-ruby'
   gem 'webmock'
 end
 
@@ -17,3 +17,4 @@ gem 'pact_broker-client'
 gem 'pry-byebug', '~> 3'
 gem 'rake', '~> 12'
 gem 'rspec', '~> 3'
+
