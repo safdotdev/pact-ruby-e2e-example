@@ -22,13 +22,7 @@ jobs:
         working-directory: ${{ matrix.project }}
       - run: "bundle exec rake pact:verify:foobar"
         working-directory: ${{ matrix.project }}
-        if: matrix.os != 'windows-latest'
+        if: matrix.os != 'windows-latest' && matrix.project != 'e2e-pact-ruby-v1'
       - run: "ruby.exe -S pact verify --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
         working-directory: ${{ matrix.project }}
-        if: matrix.os == 'windows-latest'
-      - run: "bundle exec rake pact:verify:foobar"
-        working-directory: ${{ matrix.project }}
-        if: matrix.os != 'windows-latest' || matrix.project != 'e2e-pact-ruby-v1'
-      - run: "ruby.exe -S pact verify --pact-helper ./provider/spec/pact_helper.rb --pact-uri ./consumer/spec/pacts/foo-bar.json"
-        working-directory: ${{ matrix.project }}
-        if: matrix.os == 'windows-latest' && matrix.project != 'e2e'
+        if: matrix.os == 'windows-latest' && matrix.project == 'e2e-pact-ruby-v1'
