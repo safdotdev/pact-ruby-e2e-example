@@ -1,0 +1,15 @@
+source 'http://rubygems.org'
+
+gem 'rake', '~> 13'
+gem 'rspec'
+
+# for pact
+gem 'sbmt-pact'
+gem 'combustion'
+gem 'webmock'
+
+# for kafka
+gem "sbmt-kafka_consumer", ">= 2.0.1"
+gem "sbmt-kafka_producer", ">= 1.0"
+gem 'gruf', '>= 2.18'
+gem 'gruf-rspec', '>= 0.6.0'

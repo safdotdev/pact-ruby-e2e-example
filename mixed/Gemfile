@@ -1,0 +1,14 @@
+source 'http://rubygems.org'
+
+gem 'combustion'
+gem 'faraday', '~> 1.0', '< 3.0'
+gem 'gruf', '>= 2.18'
+gem 'gruf-rspec', '>= 0.6.0'
+gem 'rake', '~> 13'
+gem 'rspec'
+gem 'rspec_junit_formatter'
+gem 'rspec-rails'
+gem 'sbmt-pact'
+gem 'webmock'
+gem "sbmt-kafka_consumer", ">= 2.0.1"
+gem "sbmt-kafka_producer", ">= 1.0"

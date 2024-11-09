@@ -1,0 +1,14 @@
+source 'http://rubygems.org'
+
+
+gem 'rake', '~> 13'
+
+## for pact
+gem 'rspec'
+gem 'sbmt-pact'
+gem 'combustion'
+gem 'webmock'
+
+## for grpc
+gem 'gruf', '>= 2.18'
+gem 'gruf-rspec', '>= 0.6.0'

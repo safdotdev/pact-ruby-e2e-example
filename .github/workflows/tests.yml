@@ -1,0 +1,33 @@
+name: Ruby
+
+on:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['3.3']
+        os: [ windows-latest, macos-13, macos-14, ubuntu-latest ]
+        type: [http, kafka, grpc, mixed]
+    env:
+      RUBY_VERSION: ${{ matrix.ruby }}
+    name: Ruby ${{ matrix.ruby }}-${{ matrix.os }}-${{ matrix.type }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby
+        if: env.ACT == 'true' && runner.arch == 'ARM64'
+        run: sudo apt-get update && apt-get install -y ruby-full ruby-bundler
+      - name: Setup Ruby w/ same version as image
+        if: env.ACT != 'true' && runner.arch != 'ARM64'
+        uses: ruby/setup-ruby@v1
+        with:
+            ruby-version: ${{ matrix.ruby }}
+      - name: Install dependencies
+        run: make install
+        working-directory: ${{ matrix.type }}
+      - name: Run tests
+        run: make
+        working-directory: ${{ matrix.type }}
