@@ -1,5 +1,6 @@
 require 'rspec/core/rake_task'
 
-RSpec::Core::RakeTask.new('spec') do | task |
-  task.pattern = "consumer/spec/bar_spec.rb"
+RSpec::Core::RakeTask.new('pact:spec') do |task|
+  task.pattern = 'spec/pact/providers/**/*_spec.rb'
+  task.rspec_opts = ['-t pact']
 end
