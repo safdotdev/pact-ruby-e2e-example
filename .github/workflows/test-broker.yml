@@ -17,6 +17,10 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
+      - run: bundle install
+        working-directory: pact_broker
+      - run: bundle exec rackup -s puma --pid broker.pid &
+        working-directory: pact_broker
       - run: "bundle install"
         working-directory: ${{ matrix.project }}
       - run: "bundle exec rake pact:spec"
@@ -25,10 +29,6 @@ jobs:
         working-directory: ${{ matrix.project }}
       - run: "bundle exec rake pact:publish"
         working-directory: ${{ matrix.project }}/consumer
-      - run: bundle install
-        working-directory: pact_broker
-      - run: bundle exec rackup -s puma --pid broker.pid &
-        working-directory: pact_broker
       - run: "bundle exec rake pact:verify:foobar"
         working-directory: ${{ matrix.project }}/provider
         env:
