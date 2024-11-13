@@ -12,10 +12,10 @@ else
   gem 'webmock'
 end
 
-gem 'faraday', '~> 1.0', '< 3.0'
+gem 'faraday'
 gem 'pact_broker-client'
-gem 'pry-byebug', '~> 3'
-gem 'rake', '~> 12'
-gem 'rspec', '~> 3'
+gem 'pry-byebug'
+gem 'rake'
+gem 'rspec'
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
