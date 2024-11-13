@@ -1,0 +1,51 @@
+name: Test
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby_version: ["3.3"]
+        os: ["ubuntu-latest"]
+        # os: ["ubuntu-latest","windows-latest","macos-latest"]
+        project: [e2e]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby_version }}
+      - run: "bundle install"
+        working-directory: ${{ matrix.project }}
+      - run: "bundle exec rake pact:spec"
+        working-directory: ${{ matrix.project }}
+      - run: "bundle exec rake pact:verify:foobar"
+        working-directory: ${{ matrix.project }}
+      - run: "bundle exec rake pact:publish"
+        working-directory: ${{ matrix.project }}/consumer
+      - run: bundle install
+        working-directory: pact_broker
+      - run: bundle exec rackup -s puma --pid broker.pid &
+        working-directory: pact_broker
+      - run: "bundle exec rake pact:verify:foobar"
+        working-directory: ${{ matrix.project }}/provider
+        env:
+          PACT_URL: http://localhost:9292/pacts/provider/Bar/consumer/Foo/latest
+      - run: "bundle exec rake pact:verify:foobar"
+        working-directory: ${{ matrix.project }}/provider
+        env:
+          PACT_BROKER_URL: http://localhost:9292
+      - run: "bundle exec rake pact:verify:foobar"
+        working-directory: ${{ matrix.project }}/provider
+        env:
+          PACT_URL: http://localhost:9292/pacts/provider/Bar/consumer/Foo/latest
+          PACT_PUBLISH_VERIFICATION_RESULTS: true
+      - run: "bundle exec rake pact:verify:foobar"
+        working-directory: ${{ matrix.project }}/provider
+        env:
+          PACT_BROKER_URL: http://localhost:9292
+          PACT_PUBLISH_VERIFICATION_RESULTS: true
+      - run: kill -9 $(cat broker.pid)
+        working-directory: pact_broker

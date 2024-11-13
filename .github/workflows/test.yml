@@ -18,7 +18,7 @@ jobs:
           ruby-version: ${{ matrix.ruby_version }}
       - run: "bundle install"
         working-directory: ${{ matrix.project }}
-      - run: "bundle exec rake spec"
+      - run: "bundle exec rake pact:spec"
         working-directory: ${{ matrix.project }}
       - run: "bundle exec rake pact:verify:foobar"
         working-directory: ${{ matrix.project }}
