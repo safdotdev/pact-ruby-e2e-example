@@ -1,0 +1,36 @@
+{
+    "events": [
+      {
+        "name": "contract_published"
+      },
+      {
+        "name": "provider_verification_published"
+      }
+    ],
+    "request": {
+      "method": "POST",
+      "url": "http://localhost:9090",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "body": {
+        "secret": "${secret.somesecret}",
+        "pactUrl": "${pactbroker.pactUrl}",
+        "providerName": "${pactbroker.providerName}",
+        "providerLabels": "${pactbroker.providerLabels}",
+        "providerVersionTags": "${pactbroker.providerVersionTags}",
+        "providerVersionNumber": "${pactbroker.providerVersionNumber}",
+        "providerVersionBranch": "${pactbroker.providerVersionBranch}",
+        "consumerName": "${pactbroker.consumerName}",
+        "consumerLabels": "${pactbroker.consumerLabels}",
+        "consumerVersionTags": "${pactbroker.consumerVersionTags}",
+        "consumerVersionNumber": "${pactbroker.consumerVersionNumber}",
+        "consumerVersionBranch": "${pactbroker.consumerVersionBranch}",
+        "githubVerificationStatus": "${pactbroker.githubVerificationStatus}",
+        "bitbucketVerificationStatus": "${pactbroker.bitbucketVerificationStatus}",
+        "verificationResultUrl": "${pactbroker.verificationResultUrl}"
+      },
+      "username": "USERNAME",
+      "password": "PASSWORD"
+    }
+  }

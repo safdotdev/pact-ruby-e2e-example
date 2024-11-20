@@ -1,0 +1,35 @@
+{
+    "events": [
+        {
+            "name": "contract_published"
+        }
+    ],
+    "request": {
+        "method": "POST",
+        "url": "http://localhost:9090",
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer <YOUR_SECRET_HERE>"
+        },
+        "body": {
+            "event_type": "contract_published",
+            "client_payload": {
+                "text": "New version of pact created for ${pactbroker.consumerName}/${pactbroker.providerName}: <${pactbroker.pactUrl}|contract-details>",
+                "pactUrl": "${pactbroker.pactUrl}",
+                "providerName": "${pactbroker.providerName}",
+                "providerLabels": "${pactbroker.providerLabels}",
+                "providerVersionTags": "${pactbroker.providerVersionTags}",
+                "providerVersionNumber": "${pactbroker.providerVersionNumber}",
+                "providerVersionBranch": "${pactbroker.providerVersionBranch}",
+                "consumerName": "${pactbroker.consumerName}",
+                "consumerLabels": "${pactbroker.consumerLabels}",
+                "consumerVersionTags": "${pactbroker.consumerVersionTags}",
+                "consumerVersionNumber": "${pactbroker.consumerVersionNumber}",
+                "consumerVersionBranch": "${pactbroker.consumerVersionBranch}",
+                "githubVerificationStatus": "${pactbroker.githubVerificationStatus}",
+                "bitbucketVerificationStatus": "${pactbroker.bitbucketVerificationStatus}",
+                "verificationResultUrl": "${pactbroker.verificationResultUrl}"
+            }
+        }
+    }
+}

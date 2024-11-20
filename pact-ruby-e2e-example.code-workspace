@@ -1,0 +1,34 @@
+{
+    "folders": [
+        // {
+        //     "path": "e2e"
+        // },
+        // {
+        //     "path": "grpc"
+        // },
+        // {
+        //     "path": "kafka"
+        // },
+        // {
+        //     "path": "pact_broker"
+        // },
+        // {
+        //     "path": "e2e-pact-ruby-v1"
+        // },
+        // {
+        //     "path": "http"
+        // },
+        // {
+        //     "path": "mixed"
+        // },
+        // {
+        //     "path": "webhook_server"
+        // },
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "ruby.intellisense": true
+    }
+}
