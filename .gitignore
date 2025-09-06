@@ -8,3 +8,5 @@ Gemfile.lock
 *.sqlite3
 /log
 /provider/reports
+
+!pact_broker/Gemfile.lock
