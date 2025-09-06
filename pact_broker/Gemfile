@@ -8,3 +8,4 @@ gem 'thin'
 gem 'pry-byebug'
 gem 'rackup'
 gem "padrino-core", ">= 0.16.0.pre3" # Required for the pact_broker UI.
+gem "pact-support"
