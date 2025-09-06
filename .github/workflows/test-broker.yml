@@ -31,7 +31,7 @@ jobs:
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker
-      - run: bundle exec rackup -s puma --pid broker.pid &
+      - run: bundle exec rackup -s puma --pid broker.pid
         name: Start Pact Broker
         working-directory: pact_broker
       - run: "bundle install"
