@@ -9,4 +9,4 @@ Gemfile.lock
 /log
 /provider/reports
 
-!pact_broker/Gemfile.lock
+# !pact_broker/Gemfile.lock

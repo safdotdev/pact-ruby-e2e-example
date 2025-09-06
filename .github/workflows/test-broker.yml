@@ -24,10 +24,15 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-      # - name: Install sqlite3 gem from source on Windows
-      #   if: runner.os == 'Windows'
-      #   run: |
-      #     gem install sqlite3 --platform ruby
+      - name: install scoop
+        shell: powershell
+        if: runner.os == 'windows'
+        run: |
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          "$HOME\scoop\shims\" >> $env:GITHUB_PATH
+      - name: install sqlite
+        run: |
+          scoop install sqlite
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker
