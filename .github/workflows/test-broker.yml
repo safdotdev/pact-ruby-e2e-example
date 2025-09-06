@@ -22,7 +22,10 @@ jobs:
           ruby-version: ${{ matrix.ruby_version }}
       - name: Install sqlite3 gem from source on Windows
         if: runner.os == 'Windows'
-        run: gem install sqlite3 --platform=ruby
+        run: |
+          gem uninstall sqlite3 --all
+          ridk exec pacman -S mingw-w64-x86_64-sqlite3
+          gem install sqlite3 --platform ruby
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker
