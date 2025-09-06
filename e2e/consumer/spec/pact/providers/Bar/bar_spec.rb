@@ -15,7 +15,7 @@ RSpec.describe 'BarClient', :pact do
                 '/thing',
                 headers: { 'Accept' => 'application/json' }
               )
-        .with_response(
+        .will_respond_with(
           200,
           body: {
             company: match_type_of('My big company'),
@@ -26,7 +26,7 @@ RSpec.describe 'BarClient', :pact do
     end
     it 'executes the pact test without errors' do
       interaction.execute do |mock_server|
-        mock_server_url = "#{mock_server.instance_variable_get(:@transport)}://#{mock_server.instance_variable_get(:@host)}:#{mock_server.instance_variable_get(:@port)}"
+        mock_server_url = mock_server.url
 
         # This request would normally be performed some BarClient class,
         # but just use simple request for the purposes of this test
