@@ -28,9 +28,9 @@ jobs:
           apt-get: libsqlite3-dev
           mingw: sqlite3
           vcpkg: sqlite3
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby_version }}
+      # - uses: ruby/setup-ruby@v1
+      #   with:
+      #     ruby-version: ${{ matrix.ruby_version }}
       # - name: install scoop
       #   shell: powershell
       #   if: runner.os == 'windows'
