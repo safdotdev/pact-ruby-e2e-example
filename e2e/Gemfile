@@ -18,4 +18,4 @@ gem 'pry-byebug'
 gem 'rake'
 gem 'rspec'
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+gem 'tzinfo-data', platforms: [:windows]

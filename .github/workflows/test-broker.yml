@@ -1,4 +1,4 @@
-name: Test
+name: Test Broker Workflow
 
 on: [push, pull_request]
 
@@ -24,7 +24,7 @@ jobs:
         with:
           ruby-version: ${{ matrix.ruby_version }}
           bundler-cache: true
-          bundler-cache-path: ${{ matrix.project }}
+          working-directory: ${{ matrix.project }}
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker

@@ -1,7 +1,7 @@
-name: Ruby
+name: "Test transport type: http/kafka/grpc/mixed"
 
 on:
-  # push:
+  push:
   pull_request:
     branches:
       - master
@@ -28,6 +28,8 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
             ruby-version: ${{ matrix.ruby }}
+            bundler-cache: true
+            working-directory: ${{ matrix.type }}
       - name: Install dependencies
         run: make install
         working-directory: ${{ matrix.type }}
