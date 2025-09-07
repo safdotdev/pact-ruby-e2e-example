@@ -21,7 +21,7 @@ RSpec.describe "Sbmt::Pact::Providers::Test::GrpcClient", :pact do
         super()
           .given("pet exists", pet_id: pet_id)
           .with_request(id: match_any_integer(pet_id))
-          .with_response(
+          .will_respond_with(
             pet: {
               id: match_any_integer, name: match_any_string
             }

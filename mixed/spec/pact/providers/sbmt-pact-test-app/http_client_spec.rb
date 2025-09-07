@@ -26,7 +26,7 @@ RSpec.describe "Sbmt::Pact::Providers::Test::HttpClient", :pact do
           .given("pet exists", pet_id: pet_id)
           .upon_receiving("getting a pet")
           .with_request(:get, "/pets/#{pet_id}")
-          .with_response(200, body: {
+          .will_respond_with(200, body: {
             pet: {
               id: match_any_integer(pet_id),
               bark: match_any_boolean(true),
@@ -58,7 +58,7 @@ RSpec.describe "Sbmt::Pact::Providers::Test::HttpClient", :pact do
           .with_request(:patch, "/pets/#{pet_id}",
             headers: {Authorization: match_any_string("some-token")},
             body: pet_data)
-          .with_response(200,
+          .will_respond_with(200,
             headers: {TRACE_ID: match_any_string("xxx-xxx")},
             body: {
               pet: {
