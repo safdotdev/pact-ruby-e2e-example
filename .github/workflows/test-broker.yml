@@ -24,25 +24,13 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}
-          # bundler-cache: true
-          # apt-get: libsqlite3-dev
-          # mingw: sqlite3
-          # vcpkg: sqlite3
-      # - uses: ruby/setup-ruby-pkgs@v1
-      #   with:
-      #     ruby-version: ${{ matrix.ruby_version }}
-      #     bundler-cache: true
-      #     apt-get: libsqlite3-dev
-      #     mingw: sqlite3
-      #     vcpkg: sqlite3
-      # - name: install sqlite
-      #   if: runner.os == 'windows'
-      #   run: |
-      #     gem install sqlite3 --platform=ruby -- --enable-system-libraries
+          bundler-cache: true
+          bundler-cache-path: ${{ matrix.project }}
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker
-      - run: bundle exec rackup -s puma --pid broker.pid
+      - run: bundle exec rackup -s puma --pid broker.pid &
+        shell: bash
         name: Start Pact Broker
         working-directory: pact_broker
       - run: "bundle install"
