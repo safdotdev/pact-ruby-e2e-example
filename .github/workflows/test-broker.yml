@@ -32,9 +32,9 @@ jobs:
         shell: bash
         name: Start Pact Broker
         working-directory: pact_broker
-      - run: "bundle install"
-        name: Install dependencies (e2e)
-        working-directory: ${{ matrix.project }}
+      # - run: "bundle install"
+      #   name: Install dependencies (e2e)
+      #   working-directory: ${{ matrix.project }}
       - run: "bundle exec rake pact:spec"
         name: Pact consumer tests
         working-directory: ${{ matrix.project }}
@@ -70,3 +70,11 @@ jobs:
         shell: bash
         name: Stop Pact Broker
         working-directory: pact_broker
+        if: runner.os != 'Windows'
+
+      - run: |
+          for /f %%i in (broker.pid) do taskkill /PID %%i /F
+        shell: cmd
+        name: Stop Pact Broker (Windows)
+        working-directory: pact_broker
+        if: runner.os == 'Windows'
