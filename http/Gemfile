@@ -7,3 +7,5 @@ gem 'rspec'
 gem 'rspec-rails'
 gem 'sbmt-pact'
 gem 'webmock'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]

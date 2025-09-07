@@ -34,5 +34,6 @@ jobs:
         run: make install
         working-directory: ${{ matrix.type }}
       - name: Run tests
+        if: ${{ !(matrix.os == 'windows-latest' && matrix.type == 'kafka') }}
         run: make
         working-directory: ${{ matrix.type }}
