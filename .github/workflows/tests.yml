@@ -14,6 +14,11 @@ jobs:
         ruby: ['3.3']
         os: [ windows-latest, macos-13, macos-14, ubuntu-latest ]
         type: [http, kafka, grpc, mixed]
+        exclude:
+          - os: windows-latest
+            type: kafka # no windows support for kafka gems
+          - os: windows-latest
+            type: mixed # need to skip kafka tests from mixed
     env:
       RUBY_VERSION: ${{ matrix.ruby }}
     name: Ruby ${{ matrix.ruby }}-${{ matrix.os }}-${{ matrix.type }}
@@ -34,6 +39,5 @@ jobs:
         run: make install
         working-directory: ${{ matrix.type }}
       - name: Run tests
-        if: ${{ !(matrix.os == 'windows-latest' && matrix.type == 'kafka') }}
         run: make
         working-directory: ${{ matrix.type }}
