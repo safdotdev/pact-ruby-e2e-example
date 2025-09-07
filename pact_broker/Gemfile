@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'pact_broker'
-gem 'sqlite3', platforms: :ruby
+gem 'sqlite3',force_ruby_platform: true
 gem 'puma'
 gem 'thin'
 gem 'pry-byebug'
