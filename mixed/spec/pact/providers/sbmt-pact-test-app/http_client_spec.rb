@@ -3,10 +3,12 @@
 require "sbmt/pact/rspec"
 
 RSpec.describe "Sbmt::Pact::Providers::Test::HttpClient", :pact do
-  has_http_pact_between "sbmt-pact-test-app", "sbmt-pact-test-app"
+  has_http_pact_between "sbmt-pact-test-app", "sbmt-pact-test-app", opts: {
+    mock_port: 3000
+  }
 
   let(:pet_id) { 123 }
-  let(:host) { "localhost:3000" }
+  let(:host) { "127.0.0.1:3000" }
   let(:interaction) { new_interaction }
   let(:http_client) do
     Faraday.new do |conn|
