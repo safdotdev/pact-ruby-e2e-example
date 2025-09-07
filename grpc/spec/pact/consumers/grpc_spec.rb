@@ -3,5 +3,7 @@
 require "sbmt/pact/rspec"
 
 RSpec.describe "Sbmt::Pact::Consumers::Grpc", :pact do
-  grpc_pact_provider "sbmt-pact-test-app"
+  grpc_pact_provider "sbmt-pact-test-app", opts: {
+    grpc_port: 3009
+  }
 end

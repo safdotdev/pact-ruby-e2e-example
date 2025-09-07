@@ -91,7 +91,7 @@ RSpec.describe 'Sbmt::Pact::Providers::Test::Kafka', :pact do
         expect(Rails.logger).to receive(:info).with(/Pet ID: 1/)
         expect(meta).to eq(
           {
-            'contentType' => 'application/protobuf;message=Pet',
+            'contentType' => 'application/protobuf;message=.pet_store.v1.Pet',
             'headers' => {
               'identity-key' => 'some-key'
             },
