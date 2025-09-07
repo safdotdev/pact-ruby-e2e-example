@@ -8,11 +8,10 @@ jobs:
       fail-fast: false
       matrix:
         ruby_version: ["3.3"]
-        # os: ["ubuntu-latest","macos-latest"]
         os: [
-          # "ubuntu-latest",
+          "ubuntu-latest",
           "windows-latest",
-          # "macos-latest"
+          "macos-latest"
           ]
         project: [e2e]
     runs-on: ${{ matrix.os }}
@@ -68,5 +67,6 @@ jobs:
           PACT_BROKER_URL: http://localhost:9292
           PACT_PUBLISH_VERIFICATION_RESULTS: true
       - run: kill -9 $(cat broker.pid)
+        shell: bash
         name: Stop Pact Broker
         working-directory: pact_broker
