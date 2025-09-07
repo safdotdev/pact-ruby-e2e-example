@@ -7,7 +7,11 @@ gem 'rake', '~> 13'
 gem 'rspec'
 gem 'rspec_junit_formatter'
 gem 'rspec-rails'
-gem 'sbmt-pact'
+if ENV['X_PACT_DEVELOPMENT']
+  gem 'sbmt-pact', path: '../../sbmt-pact'
+else
+  gem 'sbmt-pact', git: 'https://github.com/YOU54F/sbmt-pact.git', branch: 'feat/pact-ruby'
+end
 gem 'combustion'
 gem 'webmock'
 unless RUBY_PLATFORM =~ /win32|x64-mingw32|x64-mingw-ucrt/
