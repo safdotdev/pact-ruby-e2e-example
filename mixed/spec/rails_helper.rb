@@ -13,3 +13,14 @@ rescue => e
   warn "💥 Failed to load the app: #{e.message}\n#{e.backtrace.join("\n")}"
   exit(1)
 end
+
+# Monkey patch Gruf::Server to remove QUIT from KILL_SIGNALS for windows compatibility
+if Gem.win_platform?
+  warn "[⚠️] Windows platform detected, monkey patching Gruf::Server to remove QUIT from KILL_SIGNALS"
+  module Gruf
+    class Server
+      remove_const(:KILL_SIGNALS) if const_defined?(:KILL_SIGNALS)
+      KILL_SIGNALS = %w[INT TERM].freeze
+    end
+  end
+end
