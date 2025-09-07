@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ['3.3']
+        ruby: ["2.7", "3.0", "3.1", "3.2", "3.3", "3.4"]
         os: [ windows-latest, macos-13, macos-14, ubuntu-latest ]
         type: [http, kafka, grpc, mixed]
         exclude:
