@@ -10,7 +10,7 @@ gem 'rspec-rails'
 if ENV['X_PACT_DEVELOPMENT']
   gem 'sbmt-pact', path: '../../sbmt-pact'
 else
-  gem 'sbmt-pact', git: 'https://github.com/YOU54F/sbmt-pact.git', branch: 'feat/pact-ruby'
+  gem 'sbmt-pact', git: 'https://github.com/YOU54F/sbmt-pact.git', branch: 'feat/pact-ruby-mixed-verifications'
 end
 gem 'combustion'
 gem 'webmock'
@@ -19,3 +19,5 @@ unless RUBY_PLATFORM =~ /win32|x64-mingw32|x64-mingw-ucrt/
   gem "sbmt-kafka_producer", ">= 1.0"
 end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+# todo rm
+# gem "karafka-rdkafka", ">= 0.20.0"

@@ -8,7 +8,7 @@ gem 'rspec-rails'
 if ENV['X_PACT_DEVELOPMENT']
   gem 'sbmt-pact', path: '../../sbmt-pact'
 else
-  gem 'sbmt-pact', git: 'https://github.com/YOU54F/sbmt-pact.git', branch: 'feat/pact-ruby'
+  gem 'sbmt-pact', git: 'https://github.com/YOU54F/sbmt-pact.git', branch: 'feat/pact-ruby-mixed-verifications'
 end
 gem 'webmock'
 
