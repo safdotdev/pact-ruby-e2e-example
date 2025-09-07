@@ -37,9 +37,10 @@ jobs:
       #   run: |
       #     iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
       #     "$HOME\scoop\shims\" >> $env:GITHUB_PATH
-      # - name: install sqlite
-      #   run: |
-      #     scoop install sqlite
+      - name: install sqlite
+        if: runner.os == 'windows'
+        run: |
+          gem install sqlite3 -- --enable-system-libraries
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker
