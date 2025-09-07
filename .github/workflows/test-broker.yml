@@ -40,7 +40,7 @@ jobs:
       - name: install sqlite
         if: runner.os == 'windows'
         run: |
-          gem install sqlite3 -- --enable-system-libraries
+          gem install sqlite3 --platform=ruby -- --enable-system-libraries
       - run: bundle install
         name: Install dependencies (pact_broker)
         working-directory: pact_broker
