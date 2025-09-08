@@ -4,10 +4,10 @@ PACT_RUBY_V1_ENABLE=false
 all: test verify
 
 install:
-	bundle install
+	PACT_RUBY_V2_ENABLE=$(PACT_RUBY_V2_ENABLE) PACT_RUBY_V1_ENABLE=$(PACT_RUBY_V1_ENABLE) bundle install
 
 verify:
-	bundle exec rspec -t pact spec/pact/consumers/*_spec.rb
+	PACT_RUBY_V2_ENABLE=$(PACT_RUBY_V2_ENABLE) PACT_RUBY_V1_ENABLE=$(PACT_RUBY_V1_ENABLE) bundle exec rspec -t pact spec/pact/consumers/*_spec.rb
 
 test:
-	bundle exec rspec -t pact spec/pact/providers/**/*_spec.rb
+	PACT_RUBY_V2_ENABLE=$(PACT_RUBY_V2_ENABLE) PACT_RUBY_V1_ENABLE=$(PACT_RUBY_V1_ENABLE) bundle exec rspec -t pact spec/pact/providers/**/*_spec.rb
