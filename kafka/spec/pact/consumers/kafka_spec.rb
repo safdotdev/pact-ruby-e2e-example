@@ -3,7 +3,9 @@
 require "pact/v2/rspec"
 
 RSpec.describe "Pact::V2::Consumers::Kafka", :pact do
-  message_pact_provider "pact-v2-test-app"
+  message_pact_provider "pact-v2-test-app", opts: {
+    pact_dir:   File.expand_path('../../pacts', __dir__),
+  }
 
   handle_message "pet message as json" do |provider_state|
     pet_id = provider_state.dig("params", "pet_id")
