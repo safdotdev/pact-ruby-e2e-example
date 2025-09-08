@@ -12,7 +12,7 @@ require 'pact_broker/client/tasks'
 
 PactBroker::Client::PublicationTask.new do | task |
   task.auto_detect_version_properties = true
-  task.pattern = 'spec/internal/pacts/*.json' # optional, default value is 'spec/pacts/*.json'
+  task.pattern = 'spec/pacts/*.json' # optional, default value is 'spec/pacts/*.json'
   
   task.pact_broker_base_url = "http://localhost:9292"
   # task.pact_broker_base_url = "https://testdemo.pactflow.io"

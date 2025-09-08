@@ -24,9 +24,9 @@ RSpec.describe 'Verify consumers for Bar Provider', :pact do
     # Pact Sources
 
     # Local pacts from a directory
-    # Default is File.expand_path('../../../spec/internal/pacts', __dir__)
+    # Default is File.expand_path('../../../spec/pacts', __dir__)
     
-    pact_dir: File.expand_path('../../../../consumer/spec/internal/pacts', __dir__),
+    pact_dir: File.expand_path('../../../../consumer/spec/pacts', __dir__),
     
     
     # Broker pacts
