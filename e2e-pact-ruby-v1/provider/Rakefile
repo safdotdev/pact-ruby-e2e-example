@@ -1,6 +1,9 @@
 require 'pact/tasks/verification_task'
 require 'pact_broker/client/tasks'
 
+ENV['PACT_RUBY_V2_ENABLE'] = 'false'
+ENV['PACT_RUBY_V1_ENABLE'] = 'true'
+
 LOCAL_PACT_BROKER_BASE_URL = 'http://localhost:9292'
 REMOTE_PACT_BROKER_BASE_URL = 'https://test.pact.dius.com.au'
 

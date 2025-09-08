@@ -1,3 +1,6 @@
+ENV['PACT_RUBY_V2_ENABLE'] = 'true'
+ENV['PACT_RUBY_V1_ENABLE'] = 'false'
+
 task 'pact:spec' do
   sh 'cd consumer && bundle exec rake pact:spec'
 end

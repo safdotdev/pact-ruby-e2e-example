@@ -1,5 +1,8 @@
 require 'rspec/core/rake_task'
 
+ENV['PACT_RUBY_V2_ENABLE'] = 'true'
+ENV['PACT_RUBY_V1_ENABLE'] = 'false'
+
 RSpec::Core::RakeTask.new('pact:verify:foobar') do |task|
   task.pattern = 'spec/pact/consumers/*_spec.rb'
   task.rspec_opts = ['-t pact']

@@ -1,3 +1,6 @@
+PACT_RUBY_V2_ENABLE=true
+PACT_RUBY_V1_ENABLE=false
+
 all: test verify
 
 install:

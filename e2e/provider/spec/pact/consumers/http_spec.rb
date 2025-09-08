@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'sbmt/pact/rspec'
+require 'pact/v2/rspec'
 require_relative '../../../bar_app'
 
 RSpec.describe 'Verify consumers for Bar Provider', :pact do

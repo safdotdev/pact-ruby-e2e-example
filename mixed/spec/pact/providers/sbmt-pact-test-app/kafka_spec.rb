@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'sbmt/pact/rspec'
+require 'pact/v2/rspec'
 
-RSpec.describe 'Sbmt::Pact::Providers::Test::Kafka', :pact do
-  has_message_pact_between 'sbmt-pact-test-app', 'sbmt-pact-test-app'
+RSpec.describe 'Pact::V2::Providers::Test::Kafka', :pact do
+  has_message_pact_between 'pact-v2-test-app', 'pact-v2-test-app'
 
   let(:karafka_message) { Struct.new(:payload, keyword_init: true) }
 

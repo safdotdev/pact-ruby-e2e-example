@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "sbmt/pact/rspec"
+require "pact/v2/rspec"
 
-RSpec.describe "Sbmt::Pact::Consumers::Kafka", :pact do
-  message_pact_provider "sbmt-pact-test-app"
+RSpec.describe "Pact::V2::Consumers::Kafka", :pact do
+  message_pact_provider "pact-v2-test-app"
 
   handle_message "pet message as json" do |provider_state|
     pet_id = provider_state.dig("params", "pet_id")

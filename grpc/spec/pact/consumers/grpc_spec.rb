@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "sbmt/pact/rspec"
+require "pact/v2/rspec"
 
-RSpec.describe "Sbmt::Pact::Consumers::Grpc", :pact do
-  grpc_pact_provider "sbmt-pact-test-app", opts: {
+RSpec.describe "Pact::V2::Consumers::Grpc", :pact do
+  grpc_pact_provider "pact-v2-test-app", opts: {
     grpc_port: 3009
   }
 end

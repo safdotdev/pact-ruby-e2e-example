@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "sbmt/pact/rspec"
+require "pact/v2/rspec"
 
-RSpec.describe "Sbmt::Pact::Providers::Test::GrpcClient", :pact do
-  has_grpc_pact_between "sbmt-pact-test-app", "sbmt-pact-test-app"
+RSpec.describe "Pact::V2::Providers::Test::GrpcClient", :pact do
+  has_grpc_pact_between "pact-v2-test-app", "pact-v2-test-app"
 
   let(:pet_id) { 123 }
 

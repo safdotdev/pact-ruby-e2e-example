@@ -1,5 +1,8 @@
 require 'rspec/core/rake_task'
 
+ENV['PACT_RUBY_V2_ENABLE'] = 'false'
+ENV['PACT_RUBY_V1_ENABLE'] = 'true'
+
 RSpec::Core::RakeTask.new('spec') do | task |
   task.pattern = "consumer/spec/bar_spec.rb"
 end

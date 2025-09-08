@@ -21,6 +21,8 @@ jobs:
             type: mixed # need to skip kafka tests from mixed
     env:
       RUBY_VERSION: ${{ matrix.ruby }}
+      PACT_RUBY_V2_ENABLE: true
+      PACT_RUBY_V1_ENABLE: false
     name: Ruby ${{ matrix.ruby }}-${{ matrix.os }}-${{ matrix.type }}
     steps:
       - name: Checkout code

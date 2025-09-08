@@ -16,6 +16,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set PACT_RUBY_V2_ENABLE env var
+        run: |
+          if [ "${{ matrix.project }}" = "e2e" ]; then
+            echo "PACT_RUBY_V2_ENABLE=true" >> $GITHUB_ENV
+            echo "PACT_RUBY_V1_ENABLE=false" >> $GITHUB_ENV
+          else
+            echo "PACT_RUBY_V2_ENABLE=false" >> $GITHUB_ENV
+            echo "PACT_RUBY_V1_ENABLE=true" >> $GITHUB_ENV
+          fi
+        shell: bash
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby_version }}

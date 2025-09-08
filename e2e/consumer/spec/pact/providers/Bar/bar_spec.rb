@@ -1,4 +1,4 @@
-require 'sbmt/pact/rspec'
+require 'pact/v2/rspec'
 require 'faraday'
 
 RSpec.describe 'BarClient', :pact do

@@ -70,8 +70,8 @@
     "pactSpecification": {
       "version": "4.0"
     },
-    "sbmt-pact": {
-      "pact-ffi": "0.4.22"
+    "pact-ruby-v2": {
+      "pact-ffi": "0.4.28"
     }
   },
   "provider": {
