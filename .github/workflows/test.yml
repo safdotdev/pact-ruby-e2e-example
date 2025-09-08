@@ -1,7 +1,7 @@
 name: Test e2e/e2e-v1
 
 on:
-  push:
+  # push:
   pull_request:
     branches:
       - master
