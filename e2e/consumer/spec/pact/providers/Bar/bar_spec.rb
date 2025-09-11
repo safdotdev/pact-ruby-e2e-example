@@ -11,12 +11,12 @@ RSpec.describe 'BarClient', :pact do
       super()
         .upon_receiving('a retrieve thing request')
         .with_request(
-                :get,
-                '/thing',
+                method: :get,
+                path: '/thing',
                 headers: { 'Accept' => 'application/json' }
               )
         .will_respond_with(
-          200,
+          status: 200,
           body: {
             company: match_type_of('My big company'),
             factories: match_each(location: 'Sydney',
